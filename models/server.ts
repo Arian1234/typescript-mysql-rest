@@ -1,9 +1,12 @@
-import userRouter from '../routes/usuarios.route';
-import catalogRouter from '../routes/catalogs.route'
-import imageRouter from '../routes/images.route'
 import cors from 'cors';
 import express from 'express';
 import db from '../database/conecction';
+import userRouter from '../routes/usuarios.route';
+import catalogRouter from '../routes/catalogs.route';
+import imageRouter from '../routes/images.route';
+import subRouter from '../routes/sub_descriptions.route';
+import descriptionRouter from '../routes/description.route';
+import sectionRouter from '../routes/sections.route';
 
 class Server {
     private app: express.Application;
@@ -12,6 +15,9 @@ class Server {
         usuarios: '/api/usuarios',
         catalogs: '/api/catalogs',
         images: '/api/images',
+        sub_descriptions: '/api/subs',
+        descriptions: '/api/descriptions',
+        sections: '/api/sections',
     }
     constructor() {
         this.app = express();
@@ -32,6 +38,9 @@ class Server {
         this.app.use(this.apiPatchs.usuarios, userRouter);
         this.app.use(this.apiPatchs.catalogs, catalogRouter);
         this.app.use(this.apiPatchs.images, imageRouter);
+        this.app.use(this.apiPatchs.sub_descriptions, subRouter);
+        this.app.use(this.apiPatchs.descriptions,descriptionRouter);
+        this.app.use(this.apiPatchs.sections, sectionRouter);
     }
     middlewares() {
         //Cors

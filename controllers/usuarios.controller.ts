@@ -11,7 +11,6 @@ export const getUsuarios = async (req: Request, res: Response) => {
         res.json({
             usuarios
         });
-        var clave = '';
     } catch (err) {
         res.status(500).json({
             msg: `Acaba de suceder un error en su operación ,comuniquese con el administrador ${err}`
@@ -47,7 +46,7 @@ export const getUsuario = async (req: Request, res: Response) => {
 export const postUsuarios = async (req: Request, res: Response) => {
     var { nombreuser, apellidouser, documentouser,
         correouser, pwduser, birthuser, contactouser } = req.body;
-    const us = new Usuario();
+
 
     try {
         if (await existeusuario(req)) {

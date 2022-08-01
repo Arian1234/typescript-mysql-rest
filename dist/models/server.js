@@ -12,18 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const usuarios_route_1 = __importDefault(require("../routes/usuarios.route"));
-const catalogs_route_1 = __importDefault(require("../routes/catalogs.route"));
-const images_route_1 = __importDefault(require("../routes/images.route"));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const conecction_1 = __importDefault(require("../database/conecction"));
+const usuarios_route_1 = __importDefault(require("../routes/usuarios.route"));
+const catalogs_route_1 = __importDefault(require("../routes/catalogs.route"));
+const images_route_1 = __importDefault(require("../routes/images.route"));
+const sub_descriptions_route_1 = __importDefault(require("../routes/sub_descriptions.route"));
+const description_route_1 = __importDefault(require("../routes/description.route"));
+const sections_route_1 = __importDefault(require("../routes/sections.route"));
 class Server {
     constructor() {
         this.apiPatchs = {
             usuarios: '/api/usuarios',
             catalogs: '/api/catalogs',
             images: '/api/images',
+            sub_descriptions: '/api/subs',
+            descriptions: '/api/descriptions',
+            sections: '/api/sections',
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8800';
@@ -40,6 +46,9 @@ class Server {
         this.app.use(this.apiPatchs.usuarios, usuarios_route_1.default);
         this.app.use(this.apiPatchs.catalogs, catalogs_route_1.default);
         this.app.use(this.apiPatchs.images, images_route_1.default);
+        this.app.use(this.apiPatchs.sub_descriptions, sub_descriptions_route_1.default);
+        this.app.use(this.apiPatchs.descriptions, description_route_1.default);
+        this.app.use(this.apiPatchs.sections, sections_route_1.default);
     }
     middlewares() {
         //Cors

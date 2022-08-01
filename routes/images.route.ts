@@ -6,6 +6,6 @@ router.get('/',getImages);
 router.get('/:id',getImage);
 router.post('/',postimage);
 router.put('/:id',putImage);
-router.delete('/id',deleteImage);
+router.delete('/:id',deleteImage);
 
 export default router;

@@ -23,7 +23,6 @@ const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.json({
             usuarios
         });
-        var clave = '';
     }
     catch (err) {
         res.status(500).json({
@@ -58,7 +57,6 @@ exports.getUsuario = getUsuario;
 //Registrando un nuevo usuario
 const postUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var { nombreuser, apellidouser, documentouser, correouser, pwduser, birthuser, contactouser } = req.body;
-    const us = new usuarios_model_1.default();
     try {
         if (yield existeusuario(req)) {
             return res.status(400).json({ msg: `Estas ingresando datos duplicados que ya han sido registrados con anterioriad.` });
