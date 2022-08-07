@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import Sections from '../models/sections.model';
+import categories from '../models/categories.model';
 
-export const getSections = async(req: Request, res: Response) => {
+export const getCategories = async (req: Request, res: Response) => {
     try {
-        const section = await Sections.findAll();
+        const categ = await categories.findAll();
         res.json({
-            section
+            categ
         })
     } catch (err) {
         res.status(500).json({
@@ -14,18 +14,18 @@ export const getSections = async(req: Request, res: Response) => {
     }
 }
 
-export const getSection = async (req: Request, res: Response) => {
+export const getCategory = async (req: Request, res: Response) => {
 
     const { id } = req.params;
     try {
-        const section = await Sections.findByPk(id);
-        if (section) {
+        const categ = await categories.findByPk(id);
+        if (categ) {
             res.json({
-                section
+                categ
             })
         } else {
             res.status(404).json({
-                msg: `No existe una section con id ${id}`
+                msg: `No existe una categ con id ${id}`
             });
         }
     } catch (err) {
@@ -34,39 +34,39 @@ export const getSection = async (req: Request, res: Response) => {
         });
     }
 }
-export const postSection = async(req: Request, res: Response) => {
-    const section = req.body;
+export const postCategory = async (req: Request, res: Response) => {
 
+    const categ = req.body;
     try {
-        if(await existeSection(req)){
+        if (await existeCategory(req)) {
             res.status(500).json({
-                msg:"Los datos que intenta ingresar ya estan registrados en la base de datos."
+                msg: "Los datos que intenta ingresar ya estan registrados en la base de datos."
             })
-        }else{
-            Sections.create(section).then(() => res.json({ msg: "Exito,acabas de registrar una nueva section." }))
-            .catch((err) => res.status(500).json({ msg: `Acaba de suceder un error en tu solicitud de registro. : ${err}` })); 
+        } else {
+            categories.create(categ).then(() => res.json({ msg: "Exito,acabas de registrar una nueva categ." }))
+                .catch((err) => res.status(500).json({ msg: `Acaba de suceder un error en tu solicitud de registro. : ${err}` }));
         }
-     } catch (err) {
+    } catch (err) {
         res.status(500).json({
             msg: `Acaba de suceder un error en su operación ,comuniquese con el administrador ${err}`
         });
     }
 }
-export const putSection = async(req: Request, res: Response) => {
+export const putCategory = async (req: Request, res: Response) => {
     const { id } = req.params;
     const body = req.body;
 
     try {
-        const section = await Sections.findByPk(id);
-        if (!section) {
-            return res.status(404).json({ msg: `La section con codigo ${id} no existe.` });
+        const categ = await categories.findByPk(id);
+        if (!categ) {
+            return res.status(404).json({ msg: `La categ con codigo ${id} no existe.` });
         } else {
-            if (await existeSection(req)) {
+            if (await existeCategory(req)) {
                 return res.status(500).json({
                     msg: "Los datos que intenta actualizar ya estan registrados en la base de datos."
                 });
             } else {
-                await section.update(body);
+                await categ.update(body);
                 return res.json({ body });
             }
 
@@ -79,11 +79,11 @@ export const putSection = async(req: Request, res: Response) => {
 }
 
 
-async function existeSection(req: Request) {
+async function existeCategory(req: Request) {
     const { body } = req;
-    const existeSect = await Sections.findOne({
+    const existeSect = await categories.findOne({
         where: {
-            nombsection: body.nombsection
+            nombcategory: body.nombcategory
         }
     });
     return existeSect ? true : false;

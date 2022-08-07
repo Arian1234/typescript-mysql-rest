@@ -1,8 +1,14 @@
 import { DataType, DataTypes } from 'sequelize';
 import db from "../database/conecction";
-import Sections from './sections.model';
+import sub_categories from './sub_categories.model';
 
 const Catalogs = db.define('CATALOG', {
+    id:{
+        type:DataTypes.UUID,
+        defaultValue:DataTypes.UUIDV4,
+        allowNull:false,
+        primaryKey:true
+            },
     prodcatalog: {
         type: DataTypes.STRING,
         unique: true
@@ -37,7 +43,7 @@ const Catalogs = db.define('CATALOG', {
     }
 })
 
-Sections.hasMany(Catalogs);
-Catalogs.belongsTo(Sections);
+sub_categories.hasMany(Catalogs);
+Catalogs.belongsTo(sub_categories);
 
 export default Catalogs;

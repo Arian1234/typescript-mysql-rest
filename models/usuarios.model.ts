@@ -2,6 +2,12 @@ import { DataTypes } from 'sequelize';
 import db from '../database/conecction';
 
 const Usuario = db.define('USERS', {
+    id:{
+        type:DataTypes.UUID,
+        defaultValue:DataTypes.UUIDV4,
+        allowNull:false,
+        primaryKey:true
+            },
     nombreuser: {
         type: DataTypes.STRING
     },

@@ -6,7 +6,9 @@ import catalogRouter from '../routes/catalogs.route';
 import imageRouter from '../routes/images.route';
 import subRouter from '../routes/sub_descriptions.route';
 import descriptionRouter from '../routes/description.route';
-import sectionRouter from '../routes/sections.route';
+import sub_categoryRouter from '../routes/sub_categories.route';
+import categoryRouter from '../routes/categories.route';
+import buscarcatalogRouter from '../routes/buscarCatalog.route';
 
 class Server {
     private app: express.Application;
@@ -17,7 +19,9 @@ class Server {
         images: '/api/images',
         sub_descriptions: '/api/subs',
         descriptions: '/api/descriptions',
-        sections: '/api/sections',
+        sub_categories: '/api/subcategories',
+        category:'/api/categories',
+        buscarCatalog:'/api/buscar/catalog'
     }
     constructor() {
         this.app = express();
@@ -40,7 +44,9 @@ class Server {
         this.app.use(this.apiPatchs.images, imageRouter);
         this.app.use(this.apiPatchs.sub_descriptions, subRouter);
         this.app.use(this.apiPatchs.descriptions,descriptionRouter);
-        this.app.use(this.apiPatchs.sections, sectionRouter);
+        this.app.use(this.apiPatchs.sub_categories, sub_categoryRouter);
+        this.app.use(this.apiPatchs.category, categoryRouter);
+        this.app.use(this.apiPatchs.buscarCatalog, buscarcatalogRouter);
     }
     middlewares() {
         //Cors

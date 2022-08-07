@@ -20,7 +20,9 @@ const catalogs_route_1 = __importDefault(require("../routes/catalogs.route"));
 const images_route_1 = __importDefault(require("../routes/images.route"));
 const sub_descriptions_route_1 = __importDefault(require("../routes/sub_descriptions.route"));
 const description_route_1 = __importDefault(require("../routes/description.route"));
-const sections_route_1 = __importDefault(require("../routes/sections.route"));
+const sub_categories_route_1 = __importDefault(require("../routes/sub_categories.route"));
+const categories_route_1 = __importDefault(require("../routes/categories.route"));
+const buscarCatalog_route_1 = __importDefault(require("../routes/buscarCatalog.route"));
 class Server {
     constructor() {
         this.apiPatchs = {
@@ -29,7 +31,9 @@ class Server {
             images: '/api/images',
             sub_descriptions: '/api/subs',
             descriptions: '/api/descriptions',
-            sections: '/api/sections',
+            sub_categories: '/api/subcategories',
+            category: '/api/categories',
+            buscarCatalog: '/api/buscar/catalog'
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8800';
@@ -48,7 +52,9 @@ class Server {
         this.app.use(this.apiPatchs.images, images_route_1.default);
         this.app.use(this.apiPatchs.sub_descriptions, sub_descriptions_route_1.default);
         this.app.use(this.apiPatchs.descriptions, description_route_1.default);
-        this.app.use(this.apiPatchs.sections, sections_route_1.default);
+        this.app.use(this.apiPatchs.sub_categories, sub_categories_route_1.default);
+        this.app.use(this.apiPatchs.category, categories_route_1.default);
+        this.app.use(this.apiPatchs.buscarCatalog, buscarCatalog_route_1.default);
     }
     middlewares() {
         //Cors
